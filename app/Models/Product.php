@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'pro_name',
         'pro_image',
@@ -18,4 +18,16 @@ class Product extends Model
         'pro_active',
         'category_id'
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+    public function gallaries()
+    {
+        return $this->hasMany(Gallary::class);
+    }
 }

@@ -9,6 +9,7 @@ class Gallary extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'image'
+        'image',
+        'product_id'
     ];
 }
