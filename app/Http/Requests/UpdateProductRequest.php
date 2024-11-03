@@ -24,7 +24,7 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pro_name'       => ['required', Rule::unique(Product::class)->ignore($this->route('products'))],
+            'pro_name'       => ['required', Rule::unique(Product::class)->ignore($this->route('product'))],
             'pro_image'      => 'nullable|image|max:2048',
             'pro_price'      => 'required',
             'pro_description'=> 'nullable',

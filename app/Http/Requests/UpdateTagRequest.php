@@ -24,7 +24,7 @@ class UpdateTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tag_name' => ['required', Rule::unique(Tag::class)->ignore($this->route('tags'))]
+            'tag_name' => ['required', Rule::unique(Tag::class)->ignore($this->route('tag'))]
         ];
     }
 }
