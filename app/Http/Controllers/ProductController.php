@@ -209,4 +209,24 @@ class ProductController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+    public function search(Request $request)
+    {
+        try {
+            $keyword = $request->query('search');
+            if (!$keyword) {
+                return response()->json([
+                    'messenge' => 'Từ khóa rỗng !!!',
+                    'data' => []
+                ], Response::HTTP_BAD_REQUEST);
+            }
+            $data = Product::query()->whereAny(['pro_name'], 'LIKE', "%$keyword%")->get();
+            return response()->json([
+                'data' => $data
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'messenge' => "Lỗi hệ thống !!!"
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

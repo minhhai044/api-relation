@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+Route::get('search', [ProductController::class, 'search']);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('products', ProductController::class);
 Route::apiResource('gallaries', GallaryController::class);
