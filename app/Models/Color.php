@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tag extends Model
+class Color extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'tag_name'
+        'color_name',
+        'slug',
+        'is_active',
     ];
-    public function products(){
-        return $this->belongsToMany(Product::class);
+    public function capacities()
+    {
+        return $this->belongsToMany(Capacity::class);
     }
 }

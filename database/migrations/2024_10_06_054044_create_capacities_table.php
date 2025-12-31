@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Gallary;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,8 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('gallaries', function (Blueprint $table) {
-            $table->foreignIdFor(Product::class)->constrained();
+        Schema::create('capacities', function (Blueprint $table) {
+            $table->id();
+            $table->string('cap_name');
+            $table->string('slug', 255)->unique();
+            $table->boolean('is_active')->default(true);
+            $table->timestamps();
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropColumns(Gallary::class, 'product_id');
+        Schema::dropIfExists('capacities');
     }
 };

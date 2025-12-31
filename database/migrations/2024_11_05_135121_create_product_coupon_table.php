@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Gallary;
+use App\Models\Coupon;
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,8 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('gallaries', function (Blueprint $table) {
-            $table->softDeletes();
+        Schema::create('product_coupon', function (Blueprint $table) {
+            $table->foreignIdFor(Product::class)->constrained();
+            $table->foreignIdFor(Coupon::class)->constrained();
+            $table->primary(['product_id', 'coupon_id']);
         });
     }
 
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropColumns(Gallary::class, 'deleted_at');
+        Schema::dropIfExists('product_coupon');
     }
 };
